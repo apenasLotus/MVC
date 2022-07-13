@@ -5,7 +5,7 @@ namespace app\Controller\Pages;
 use app\Utils\View;
 
 //Classe com mesmo nome do arquivo.
-class Home
+class Home extends Page
 {
     /**
      * Método responsável por retornar o conteúdo view da Home
@@ -13,10 +13,14 @@ class Home
      */
     public static function getHome()
     {
-        return View::render('Pages/Home', [
+        //Recebe a view da Home
+        $content = View::render('Pages/Home', [
             'name'        => 'MVC Gabriel',
             'description' => 'Treino MVC',
             'site'        => 'youtube.com'
         ]);
+
+        //Retorna a view da página
+        return parent::getPage('Gabriel MVC', $content);
     }
 }
