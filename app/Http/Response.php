@@ -48,7 +48,7 @@ class Response
     public function setContentType($contentType)
     {
         $this->contentType = $contentType;
-        $this->addHeader('Content-Type',$contentType);
+        $this->addHeader('Content-Type', $contentType);
     }
 
     /**
@@ -59,5 +59,20 @@ class Response
     public function addHeader($key, $value)
     {
         $this->header[$key] = $value;
+    }
+
+    /**
+     * Método responsável por enviar a resposta para o usuário
+     */
+    public function sendResponse()
+    {
+        /**
+         * Switch é executado imprimindo o conteúdo na tela, caso o mesmo for HTML
+         */
+        switch ($this->contentType) {
+            case 'text/html':
+                echo $this->content;
+                exit;
+        }
     }
 }
