@@ -3,6 +3,7 @@
 namespace app\Http;
 
 use Closure;
+use Exception;
 
 class Router
 {
@@ -81,7 +82,7 @@ class Router
         }
 
         //Padrão de validação da URL
-        $patternRoute = '/^'.str_replace('/', '\/', $route). '$/';
+        $patternRoute = '/^' . str_replace('/', '\/', $route) . '$/';
 
         //Adiciona a rota dentro da classe
         $this->routes[$patternRoute][$method] = $params;
@@ -95,5 +96,20 @@ class Router
     public function get($route, $params = [])
     {
         return $this->addRoute('GET', $route, $params);
+    }
+
+    /**
+     * Método responsável por executar a rota atual
+     * @return Response
+     */
+    public function run()
+    {
+        try{
+
+            $route = $this->getRoute();
+
+        }catch(Exception $e){
+            return new Response($e->getCode(), $e->getMessage());
+        }
     }
 }
