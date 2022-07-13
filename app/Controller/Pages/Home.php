@@ -2,6 +2,9 @@
 
 namespace app\Controller\Pages;
 
+use app\Utils\View;
+
+//Classe com mesmo nome do arquivo.
 class Home
 {
     /**
@@ -10,6 +13,10 @@ class Home
      */
     public static function getHome()
     {
-        return 'Salve';
+        return View::render('Pages/Home', [
+            'name'        => 'MVC Gabriel',
+            'description' => 'Treino MVC',
+            'site'        => 'youtube.com'
+        ]);
     }
 }
