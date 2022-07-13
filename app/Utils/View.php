@@ -29,6 +29,10 @@ class View
         //CONTEÚDO DA VIEW
         $contentView = self::getContentView($view);
 
+        //Define que mesmo se não tiver nada, a mesma ainda é um array
+        //Caso o contrario dá erro no str_replace,
+        $keys = [];
+        
         //Pega as chaves dos arrays e deixa as mesmas no padrão HTML
         foreach ($vars as $key => $value) {
             $keys[] = '{{' . $key . '}}';
@@ -39,6 +43,6 @@ class View
          * str_replace 'Oque eu quero mudar, pelo que eu quero mudar, e de onde eu quero mudar.'
          * Ou seja, as chaves no formato HTML que estão na View, pelos valores contidos em $vars.
          */
-        return str_replace($keys, $vars, $contentView);
+        return str_replace($keys, array_values($vars), $contentView);
     }
 }
