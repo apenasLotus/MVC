@@ -21,14 +21,24 @@ class View
      * Retorna o conteúdo renderizado de uma view
      * 
      * @param string $view
+     * @param array $vars (string/numeric)
      * @return string
      */
-    public static function render($view)
+    public static function render($view, $vars = [])
     {
         //CONTEÚDO DA VIEW
         $contentView = self::getContentView($view);
 
-        //Retorna o conteúdo renderizado.
-        return $contentView;
+        //Pega as chaves dos arrays e deixa as mesmas no padrão HTML
+        foreach ($vars as $key => $value) {
+            $keys[] = '{{' . $key . '}}';
+        }
+
+        /**
+         * Retorna o conteúdo renderizado.
+         * str_replace 'Oque eu quero mudar, pelo que eu quero mudar, e de onde eu quero mudar.'
+         * Ou seja, as chaves no formato HTML que estão na View, pelos valores contidos em $vars.
+         */
+        return str_replace($keys, $vars, $contentView);
     }
 }
