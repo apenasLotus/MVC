@@ -62,10 +62,26 @@ class Response
     }
 
     /**
+     * Método responsável por enviar os Headers para o navegador
+     */
+    private function sendHeaders()
+    {
+        //Define o código de status de retorno da aplicação
+        http_response_code($this->httpCode);
+
+        //Envia os HEADERS
+        foreach ($this->headers as $key => $value) {
+            header($key . ': ' . $value);
+        }
+    }
+    /**
      * Método responsável por enviar a resposta para o usuário
      */
     public function sendResponse()
     {
+        //Envia os Headers
+        $this->sendHeaders();
+        
         /**
          * Switch é executado imprimindo o conteúdo na tela, caso o mesmo for HTML
          */
