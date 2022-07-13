@@ -16,3 +16,6 @@ $obRouter->get('/',[
         return new Response(200,Home::getHome());
     }
 ]);
+
+//Imprime o response da rota
+$obRouter->run()->sendResponse();
