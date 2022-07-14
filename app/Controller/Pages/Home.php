@@ -20,11 +20,9 @@ class Home extends Page
         //Recebe a view da Home
         $content = View::render('Pages/Home', [
             'name'        => $obOrganization->name,
-            'description' => $obOrganization->description,
-            'site'        => $obOrganization->site
         ]);
 
         //Retorna a view da página
-        return parent::getPage('Gabriel MVC', $content);
+        return parent::getPage('HOME - MVC', $content);
     }
 }
