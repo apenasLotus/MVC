@@ -2,20 +2,20 @@
 
 require __DIR__."/vendor/autoload.php";
 
-use app\Controller\Pages\Home;
 use app\Http\Router;
-use app\Http\Response;
 
+/**
+ * ! Define a const da pagina, e já usa a mesma
+ */
 define('URL', 'http://127.0.0.1:8080');
-
 $obRouter = new Router(URL);
 
-//Rota HOME
-$obRouter->get('/',[
-    function(){
-        return new Response(200,Home::getHome());
-    }
-]);
+/**
+ * ! Inclui as rotas de páginas
+ */
+include __DIR__.'/routes/Pages.php';
 
-//Imprime o response da rota
+/**
+ * ! Imprime o response da rota
+ */
 $obRouter->run()->sendResponse();
