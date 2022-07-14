@@ -89,6 +89,32 @@ class Router
     }
 
     /**
+     * Método responsável por retornar a URI sem o prefixo
+     * @return string
+     */
+    private function getUri()
+    {
+        //URI da request
+        $uri = $this->request->getUri();
+
+        //Fatia a URI com o prefixo
+        $xUri = strlen($this->prefix) ?
+            explode($this->prefix, $uri) : [$uri];
+ 
+        return end($xUri);
+    }
+
+    /**
+     * Método responsável por retornar os dados da rota atual
+     * @return array
+     */
+    private function getRoute()
+    {
+        //URI
+        $uri = $this->getUri();
+    }
+
+    /**
      * Método responsável por definir uma rota de GET
      * @param string $route
      * @param array $params
@@ -104,11 +130,14 @@ class Router
      */
     public function run()
     {
-        try{
-
+        try {
+            //Obtém a rota atual
             $route = $this->getRoute();
-
-        }catch(Exception $e){
+            echo '<pre>';
+            print_r($route);
+            echo '</pre>';
+            exit;
+        } catch (Exception $e) {
             return new Response($e->getCode(), $e->getMessage());
         }
     }
