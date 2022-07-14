@@ -80,6 +80,16 @@ class Router
                 continue;
             }
         }
+        //Variáveis da rota
+        $params['variables'] = [];
+
+        //Pattern variables route
+        $patternVariable = '/{(.*?)}/';
+        //$matches é uma variável da própria função
+        if (preg_match_all($patternVariable, $route, $matches)) {
+            $route = preg_replace($patternVariable, '(.*?)', $route);
+            $params['variables'] = $matches[1];
+        }
 
         //Padrão de validação da URL
         $patternRoute = '/^' . str_replace('/', '\/', $route) . '$/';
@@ -120,11 +130,21 @@ class Router
         foreach ($this->routes as $patternRoute => $methods) {
 
             //Verifica se a URI bate com o padrão
-            if (preg_match($patternRoute, $uri)) {
+            if (preg_match($patternRoute, $uri, $matches)) {
 
                 //Verifica o Método
-                if ($methods[$httpMethod])
+                if ($methods[$httpMethod]) {
+
+                    //Remove a primeira posição
+                    unset($matches[0]);
+                    
+                    //Variáveis processadas
+                    $keys = $methods[$httpMethod]['variables'];
+                    $methods[$httpMethod]['variables'] = array_combine($keys, $matches);
+                    $methods[$httpMethod]['variables']['request'] = $this->request;
+                    
                     return $methods[$httpMethod];
+                }
 
                 throw new Exception("Método não permitido", 405);
             }
@@ -182,6 +202,11 @@ class Router
         try {
             //Obtém a rota atual
             $route = $this->getRoute();
+            echo '<pre>';
+            print_r($route);
+            echo '</pre>';
+            exit;
+
 
             //Verifica o controlador
             if (!isset($route['controller']))
