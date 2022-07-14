@@ -6,6 +6,20 @@ namespace App\Utils;
 class View
 {
     /**
+     * Variáveis padrões da View
+     * @var array 
+     */
+    private static $vars = [];
+
+    /**
+     * Método responsável por definir os dados iniciais da classe
+     * @param array $vars
+     */
+    public static function init($vars = [])
+    {
+        self::$vars = $vars;
+    }
+    /**
      * Método responsável por retornar o conteúdo da View
      * 
      * @param string $view
@@ -29,10 +43,13 @@ class View
         //CONTEÚDO DA VIEW
         $contentView = self::getContentView($view);
 
+        //MERGE de variáveis da View
+        $vars = array_merge(self::$vars, $vars);
+
         //Define que mesmo se não tiver nada, a mesma ainda é um array
         //Caso o contrario dá erro no str_replace,
         $keys = [];
-        
+
         //Pega as chaves dos arrays e deixa as mesmas no padrão HTML
         foreach ($vars as $key => $value) {
             $keys[] = '{{' . $key . '}}';
