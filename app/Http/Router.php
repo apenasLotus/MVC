@@ -100,7 +100,7 @@ class Router
         //Fatia a URI com o prefixo
         $xUri = strlen($this->prefix) ?
             explode($this->prefix, $uri) : [$uri];
- 
+
         return end($xUri);
     }
 
@@ -112,6 +112,25 @@ class Router
     {
         //URI
         $uri = $this->getUri();
+
+        //METHOD
+        $httpMethod = $this->request->getHttpMethod();
+
+        //Valida as ROTAS
+        foreach ($this->routes as $patternRoute => $methods) {
+
+            //Verifica se a URI bate com o padrão
+            if (preg_match($patternRoute, $uri)) {
+
+                //Verifica o Método
+                if ($methods[$httpMethod])
+                    return $methods[$httpMethod];
+
+                throw new Exception("Método não permitido", 405);
+            }
+        }
+
+        throw new Exception("URL não encontrada", 404);
     }
 
     /**
@@ -133,10 +152,7 @@ class Router
         try {
             //Obtém a rota atual
             $route = $this->getRoute();
-            echo '<pre>';
-            print_r($route);
-            echo '</pre>';
-            exit;
+            
         } catch (Exception $e) {
             return new Response($e->getCode(), $e->getMessage());
         }
