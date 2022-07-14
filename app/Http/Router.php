@@ -144,6 +144,36 @@ class Router
     }
 
     /**
+     * Método responsável por definir uma rota de POST
+     * @param string $route
+     * @param array $params
+     */
+    public function post($route, $params = [])
+    {
+        return $this->addRoute('POST', $route, $params);
+    }
+
+    /**
+     * Método responsável por definir uma rota de PUT
+     * @param string $route
+     * @param array $params
+     */
+    public function put($route, $params = [])
+    {
+        return $this->addRoute('PUT', $route, $params);
+    }
+
+    /**
+     * Método responsável por definir uma rota de DELETE
+     * @param string $route
+     * @param array $params
+     */
+    public function delete($route, $params = [])
+    {
+        return $this->addRoute('DELETE', $route, $params);
+    }
+
+    /**
      * Método responsável por executar a rota atual
      * @return Response
      */
@@ -152,7 +182,7 @@ class Router
         try {
             //Obtém a rota atual
             $route = $this->getRoute();
-            
+
         } catch (Exception $e) {
             return new Response($e->getCode(), $e->getMessage());
         }
