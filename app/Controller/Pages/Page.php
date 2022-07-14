@@ -1,8 +1,8 @@
 <?php
 
-namespace app\Controller\Pages;
+namespace App\Controller\Pages;
 
-use app\Utils\View;
+use App\Utils\View;
 
 //Classe com mesmo nome do arquivo.
 class Page

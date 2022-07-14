@@ -2,7 +2,7 @@
 
 require __DIR__ . "/vendor/autoload.php";
 
-use app\Http\Router;
+use App\Http\Router;
 use App\Utils\View;
 
 /**

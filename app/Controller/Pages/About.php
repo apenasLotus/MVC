@@ -1,9 +1,9 @@
 <?php
 
-namespace app\Controller\Pages;
+namespace App\Controller\Pages;
 
-use app\Utils\View;
-use app\Model\Entity\Organization;
+use App\Utils\View;
+use App\Model\Entity\Organization;
 
 //Classe com mesmo nome do arquivo.
 class About extends Page

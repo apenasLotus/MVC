@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Model\Entity;
+namespace App\Model\Entity;
 
 /**
  * Classe apenas de exemplificação, simulando um retorno de dados
