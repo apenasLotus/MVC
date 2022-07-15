@@ -133,16 +133,16 @@ class Router
             if (preg_match($patternRoute, $uri, $matches)) {
 
                 //Verifica o Método
-                if ($methods[$httpMethod]) {
+                if (isset($methods[$httpMethod])) {
 
                     //Remove a primeira posição
                     unset($matches[0]);
-                    
+
                     //Variáveis processadas
                     $keys = $methods[$httpMethod]['variables'];
                     $methods[$httpMethod]['variables'] = array_combine($keys, $matches);
                     $methods[$httpMethod]['variables']['request'] = $this->request;
-                    
+
                     return $methods[$httpMethod];
                 }
 
@@ -202,11 +202,6 @@ class Router
         try {
             //Obtém a rota atual
             $route = $this->getRoute();
-            echo '<pre>';
-            print_r($route);
-            echo '</pre>';
-            exit;
-
 
             //Verifica o controlador
             if (!isset($route['controller']))
