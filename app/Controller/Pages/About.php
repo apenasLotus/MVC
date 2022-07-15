@@ -9,10 +9,10 @@ use App\Model\Entity\Organization;
 class About extends Page
 {
     /**
-     * Método responsável por retornar o conteúdo view da Home
+     * Método responsável por retornar o conteúdo view da página de sobre
      * @return string (Conteúdo HTML a ser impresso)
      */
-    public static function getHome()
+    public static function getAbout()
     {
         //Objeto que referencia a classe de organização/retorno de um banco de dados.
         $obOrganization = new Organization;
