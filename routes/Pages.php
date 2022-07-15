@@ -14,13 +14,24 @@ $obRouter->get('/', [
 //Rota SOBRE
 $obRouter->get('/sobre', [
     function () {
-        return new Response(200, Pages\About::getHome());
+        return new Response(200, Pages\About::getAbout());
     }
 ]);
 
-//Rota DINÂMICA
-$obRouter->get('/sobre/{idPagina}', [
-    function ($idPagina) {
-        return new Response(200, $idPagina);
+//Rota TESTIMONIES
+$obRouter->get('/depoimentos', [
+    function () {
+        return new Response(200, Pages\Testimony::getTestimonies());
+    }
+]);
+
+//Rota TESTIMONIES (INSERT)
+$obRouter->post('/depoimentos', [
+    function ($request) {        
+        echo '<pre>';
+        print_r($request);
+        echo '</pre>';exit;
+        
+        return new Response(200, Pages\Testimony::getTestimonies());
     }
 ]);
