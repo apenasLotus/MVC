@@ -4,7 +4,7 @@ namespace App\Http;
 
 use Closure;
 use Exception;
-
+use ReflectionFunction;
 class Router
 {
     /**
@@ -209,6 +209,13 @@ class Router
 
             //Argumentos da função
             $args = [];
+
+            //Reflection
+            $reflection = new ReflectionFunction($route['controller']);
+            foreach ($reflection->getParameters() as $parameter) {
+                $name = $parameter->getName();
+                $args[$name] = $route['variables'][$name] ?? '';
+            }
 
             //Retorna a execução da função
             return call_user_func_array($route['controller'], $args);
