@@ -5,6 +5,11 @@ require __DIR__ . '/includes/app.php';
 use App\Http\Router;
 
 /**
+ * ! Define a const da pagina, e inicia o ROUTER
+ */
+$obRouter = new Router(URL);
+
+/**
  * ! Inclui as rotas de páginas
  */
 include __DIR__ . '/routes/Pages.php';
@@ -14,8 +19,3 @@ include __DIR__ . '/routes/Pages.php';
  */
 $obRouter->run()
     ->sendResponse();
-
-/**
- * ! Define a const da pagina, e inicia o ROUTER
- */
-$obRouter = new Router(URL);
