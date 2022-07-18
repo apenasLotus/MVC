@@ -1,28 +1,8 @@
 <?php
 
-require __DIR__ . "/vendor/autoload.php";
+require __DIR__ . '/includes/app.php';
 
 use App\Http\Router;
-use App\Utils\View;
-use WilliamCosta\DotEnv\Environment;
-
-/**
- * ! Carrega variáveis de ambiente
- */
-Environment::load(__DIR__);
-
-/**
- * ! Define a const da pagina, e inicia o ROUTER
- */
-define('URL', getenv('URL'));
-$obRouter = new Router(URL);
-
-/**
- * ! Define o valor padrão das variáveis
- */
-View::init([
-    'URL' => URL
-]);
 
 /**
  * ! Inclui as rotas de páginas
@@ -34,3 +14,8 @@ include __DIR__ . '/routes/Pages.php';
  */
 $obRouter->run()
     ->sendResponse();
+
+/**
+ * ! Define a const da pagina, e inicia o ROUTER
+ */
+$obRouter = new Router(URL);
