@@ -42,11 +42,12 @@ class Testimony
         $this->data = date('Y-m-d H:i:s');
 
         //Insere o depoimento no banco de dados
-        $this->id = (new Database('depoimentos'))->insert([
-            'nome'     => $this->nome,
-            'mensagem' => $this->mensagem,
-            'data'     => $this->data
+        $this->id = (new Database('DEPOIMENTOS'))->insert([
+            'NOME'     => $this->nome,
+            'MENSAGE' => $this->mensagem,
+            'DATA_DEPOIMENTOS'     => $this->data
         ]);
+        
         echo '<pre>';
         print_r($this);
         echo '</pre>';
