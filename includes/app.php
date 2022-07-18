@@ -6,14 +6,14 @@ use App\Utils\View;
 use WilliamCosta\DotEnv\Environment;
 
 /**
- * ! Define a constante de URL
- */
-define('URL', getenv('URL'));
-
-/**
  * ! Carrega variáveis de ambiente
  */
 Environment::load(__DIR__.'/../');
+
+/**
+ * ! Define a constante de URL
+ */
+define('URL', getenv('URL'));
 
 /**
  * ! Define o valor padrão das variáveis
