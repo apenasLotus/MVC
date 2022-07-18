@@ -85,6 +85,6 @@ class Request
      * @return array 
      */
     public function getPostVars(){
-        return $this->queryParams;
+        return $this->postVars;
     }
 }
