@@ -15,12 +15,12 @@ Environment::load(__DIR__ . '/../');
  * ! Define as configurações de Banco de Dados
  */
 Database::config([
-    getenv('driver'),
-    getenv('host'),
-    getenv('name'),
-    getenv('user'),
-    getenv('pass'),
-    getenv('port')]
+    "driver" => getenv('driver'),
+    "host" => getenv('host'),
+    "name" => getenv('name'),
+    "user" => getenv('user'),
+    "pass" => getenv('pass'),
+    "port" => getenv('port')]
 );
 
 /**
