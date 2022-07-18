@@ -4,7 +4,7 @@ require __DIR__ . "/../vendor/autoload.php";
 
 use App\Utils\View;
 use WilliamCosta\DotEnv\Environment;
-use WilliamCosta\DatabaseManager\Database;
+use App\Database\Database;
 
 /**
  * ! Carrega variáveis de ambiente
