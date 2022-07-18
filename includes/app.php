@@ -15,6 +15,7 @@ Environment::load(__DIR__ . '/../');
  * ! Define as configurações de Banco de Dados
  */
 Database::config(
+    getenv('DB_DRIVER'),
     getenv('DB_HOST'),
     getenv('DB_NAME'),
     getenv('DB_USER'),
