@@ -47,10 +47,22 @@ class Testimony
             'MENSAGE' => $this->mensagem,
             'DATA_DEPOIMENTOS'     => $this->data
         ]);
-        
-        echo '<pre>';
-        print_r($this);
-        echo '</pre>';
-        exit;
+
+        //Sucesso
+        return true;
+    }
+
+    /**
+     * Método responsável por retornar depoimentos
+     * @param string $where
+     * @param string $order
+     * @param string $limit
+     * @param string $fields
+     * 
+     * @return PDOStatement
+     */
+    public static function getTestimonies($where = null, $order = null, $limit = null, $fields = '*')
+    {
+        return (new Database('depoimentos'))->select($where, $order, $limit, $fields);
     }
 }
