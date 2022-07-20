@@ -11,9 +11,10 @@ class Testimony extends Page
 
     /**
      * Método responsável por obter a renderização dos itens de depoimentos
+     * @param Request
      * @return string
      */
-    private static function getTestimonyItens()
+    private static function getTestimonyItens($request)
     {
         //Depoimentos
         $itens = [];
@@ -36,13 +37,14 @@ class Testimony extends Page
 
     /**
      * Método responsável por retornar o conteúdo view de depoimentos
+     * @param Request
      * @return string (Conteúdo HTML a ser impresso)
      */
-    public static function getTestimonies()
+    public static function getTestimonies($request)
     {
         //Recebe a view de depoimentos
         $content = View::render('Pages/Testimonies', [
-            'itens' => self::getTestimonyItens()
+            'itens' => self::getTestimonyItens($request)
         ]);
         
 
@@ -66,6 +68,7 @@ class Testimony extends Page
         $obTestimony->mensagem = $postVars['mensagem'];
         $obTestimony->cadastrar();
 
-        return self::getTestimonies();
+        //Retorna a página de listagem de depoimentos
+        return self::getTestimonies($request);
     }
 }
