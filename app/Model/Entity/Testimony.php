@@ -11,7 +11,7 @@ class Testimony
      * ID do depoimento
      * @var integer
      */
-    public $id;
+    public $ID;
 
     /**
      * NOME do usuário que fez o depoimento
@@ -37,15 +37,16 @@ class Testimony
      */
     public function cadastrar()
     {
-
+        
         //Define e data
         $this->data = date('Y-m-d H:i:s');
-
+        
+        
         //Insere o depoimento no banco de dados
-        $this->id = (new Database('DEPOIMENTOS'))->insert([
-            'NOME'     => $this->nome,
-            'MENSAGE' => $this->mensagem,
-            'DATA_DEPOIMENTOS'     => $this->data
+        $this->ID = (new Database('DEPOIMENTOS'))->insert([
+            'nome'     => $this->nome,
+            'mensagem' => $this->mensagem,
+            'data'     => $this->data
         ]);
 
         //Sucesso
@@ -63,6 +64,6 @@ class Testimony
      */
     public static function getTestimonies($where = null, $order = null, $limit = null, $fields = '*')
     {
-        return (new Database('depoimentos'))->select($where, $order, $limit, $fields);
+        return (new Database('DEPOIMENTOS'))->select($where, $order, $limit, $fields);
     }
 }

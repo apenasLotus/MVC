@@ -4,7 +4,6 @@ namespace App\Controller\Pages;
 
 use App\Utils\View;
 use App\Model\Entity\Testimony as EntityTestimony;
-use LDAP\Result;
 
 //Classe com mesmo nome do arquivo.
 class Testimony extends Page
@@ -17,19 +16,19 @@ class Testimony extends Page
     private static function getTestimonyItens()
     {
         //Depoimentos
-        $itens = '';
+        $itens = [];
 
         //Resultados da página
-        $results = EntityTestimony::getTestimonies(null, 'id DESC');
+        $results = EntityTestimony::getTestimonies(null, 'ID DESC');
 
         //Renderiza o item
         while ($obTestimony = $results->fetchObject(EntityTestimony::class)) {
-            $itens .= View::render('Pages/Testimonies/Item', [
-                'nome' => $obTestimony->nome,
+            $itens .= View::render('Pages/Testimony/Item', [
+                'nome'     => $obTestimony->nome,
                 'mensagem' => $obTestimony->mensagem,
-                'data' => date('d/m/Y H:i:s', strtotime($obTestimony->data))
+                'data'     => date('d/m/Y H:i:s', strtotime($obTestimony->data)),
             ]);
-        }
+        }    
 
         //Retorna os depoimentos
         return $itens;
@@ -45,6 +44,7 @@ class Testimony extends Page
         $content = View::render('Pages/Testimonies', [
             'itens' => self::getTestimonyItens()
         ]);
+        
 
         //Retorna a view da página
         return parent::getPage('DEPOIMENTOS - MVC', $content);

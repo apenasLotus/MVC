@@ -39,10 +39,10 @@ class View
      * @return string
      */
     public static function render($view, $vars = [])
-    {
+    {      
         //CONTEÚDO DA VIEW
         $contentView = self::getContentView($view);
-
+      
         //MERGE de variáveis da View
         $vars = array_merge(self::$vars, $vars);
 
