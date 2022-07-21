@@ -104,7 +104,7 @@ class Request
      * Método responsável por retornar os parâmetros URL da requisição
      * @return string 
      */
-    public function queryParams()
+    public function getQueryParams()
     {
         return $this->queryParams;
     }
