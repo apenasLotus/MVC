@@ -4,6 +4,7 @@ namespace App\Controller\Pages;
 
 use App\Utils\View;
 use App\Model\Entity\Testimony as EntityTestimony;
+use App\Database\Pagination;
 
 //Classe com mesmo nome do arquivo.
 class Testimony extends Page
@@ -17,10 +18,21 @@ class Testimony extends Page
     private static function getTestimonyItens($request)
     {
         //Depoimentos
-        $itens = [];
+        $itens = '';
+
+        //Quantidade total de registros
+        $quantidadeTotal = EntityTestimony::getTestimonies(null, null, null, 'COUNT(*) as QTD')
+            ->fetchObject()->QTD;
+
+        //Página atual
+        $queryParams = $request->getQueryParams();
+        $paginaAtual = $queryParams['page'] ?? 1;        
+
+        //Instancia de paginação
+        $obPagination = new Pagination($quantidadeTotal, $paginaAtual,3);
 
         //Resultados da página
-        $results = EntityTestimony::getTestimonies(null, 'ID DESC');
+        $results = EntityTestimony::getTestimonies(null, 'ID DESC', $obPagination->getLimit());
 
         //Renderiza o item
         while ($obTestimony = $results->fetchObject(EntityTestimony::class)) {
@@ -29,7 +41,7 @@ class Testimony extends Page
                 'mensagem' => $obTestimony->mensagem,
                 'data'     => date('d/m/Y H:i:s', strtotime($obTestimony->data)),
             ]);
-        }    
+        }
 
         //Retorna os depoimentos
         return $itens;
@@ -46,7 +58,6 @@ class Testimony extends Page
         $content = View::render('Pages/Testimonies', [
             'itens' => self::getTestimonyItens($request)
         ]);
-        
 
         //Retorna a view da página
         return parent::getPage('DEPOIMENTOS - MVC', $content);
